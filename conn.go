@@ -42,7 +42,11 @@ func Dial(network, addr string) (*Conn, *Error) {
 // Dial connects to the given address on the given network using net.Dial
 // and then sets up SSL connection and returns a new Conn for the connection.
 func DialSSL(network, addr string) (*Conn, *Error) {
-	c, err := tls.Dial(network, addr, nil)
+	return DialSSLConfig(network, addr, nil)
+}
+
+func DialSSLConfig(network, addr string, config *tls.Config) (*Conn, *Error) {
+	c, err := tls.Dial(network, addr, config)
 	if err != nil {
 		return nil, NewError(ErrorNetwork, err)
 	}
