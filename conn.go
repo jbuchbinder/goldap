@@ -39,12 +39,16 @@ func Dial(network, addr string) (*Conn, *Error) {
 	return conn, nil
 }
 
-// Dial connects to the given address on the given network using net.Dial
+// DialSSL connects to the given address on the given network using net.Dial
 // and then sets up SSL connection and returns a new Conn for the connection.
 func DialSSL(network, addr string) (*Conn, *Error) {
 	return DialSSLConfig(network, addr, nil)
 }
 
+// DialSSLConfig connects to the given address on the given network using
+// net.Dial and then sets up SSL connection and returns a new Conn for
+// the connection. This variation of DialSSL allows a *tls.Config instance
+// to be passed, for much greater configurability.
 func DialSSLConfig(network, addr string, config *tls.Config) (*Conn, *Error) {
 	c, err := tls.Dial(network, addr, config)
 	if err != nil {
