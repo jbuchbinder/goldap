@@ -5,4 +5,4 @@ go:
   - tip
 install:
   - go get github.com/jbuchbinder/go-asn1-ber
-  - go build && go test -v
+  - go build 
